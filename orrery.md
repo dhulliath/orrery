@@ -1,4 +1,5 @@
 ---
+title: Natal Chart
 layout: orrery
 language: en
 css_additional:

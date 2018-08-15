@@ -1,4 +1,5 @@
 ---
+title: Astrology Stuff
 layout: dev
 js_additional:
  - /js/orreryEngine.js
