@@ -1,0 +1,11 @@
+---
+layout: base
+---
+
+<div style="width: 100%; text-align: center;">
+{% for link in site.data.orrery.dev_nav %}
+	<a style="min-width: 10%; display:inline-block" href="{{ link.url }}">{{ link.title }}</a>
+{% endfor %}
+</div>
+
+{{ content }}

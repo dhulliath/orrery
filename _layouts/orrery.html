@@ -1,0 +1,11 @@
+---
+layout: bare
+---
+
+{% assign oStrings = site.data.orrery.strings[page.language] %}
+
+{% include orrery.html %}
+
+<section>
+	{{ content }}
+</section>

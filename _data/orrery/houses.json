@@ -1,0 +1,50 @@
+{
+	"0": {
+		"name": "HOUSE_0",
+		"ruler": "aries"
+	},
+	"1": {
+		"name": "HOUSE_1",
+		"ruler": "taurus"
+	},
+	"2": {
+		"name": "HOUSE_2",
+		"ruler": "gemini"
+	},
+	"3": {
+		"name": "HOUSE_3",
+		"ruler": "cancer"
+	},
+	"4": {
+		"name": "HOUSE_4",
+		"ruler": "leo"
+	},
+	"5": {
+		"name": "HOUSE_5",
+		"ruler": "virgo"
+	},
+	"6": {
+		"name": "HOUSE_6",
+		"ruler": "libra"
+	},
+	"7": {
+		"name": "HOUSE_7",
+		"ruler": "scorpio"
+	},
+	"8": {
+		"name": "HOUSE_8",
+		"ruler": "sagittarius"
+	},
+	"9": {
+		"name": "HOUSE_9",
+		"ruler": "capricorn"
+	},
+	"10": {
+		"name": "HOUSE_10",
+		"ruler": "aquarius"
+	},
+	"11": {
+		"name": "HOUSE_11",
+		"ruler": "pisces"
+	}
+}

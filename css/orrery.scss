@@ -1,0 +1,149 @@
+--- 
+--- 
+@import url('https://fonts.googleapis.com/css?family=Kanit:800|Oswald');
+
+body {
+    background: url(/img/stars.png) black repeat top center;
+}
+.backgroundEffects {
+    &.twinkle {
+        position: absolute;
+        z-index: -999;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        background: transparent url(/img/twinkling.png) repeat top center;
+        animation:move-twink-back 200s linear infinite;
+    }
+}
+@keyframes move-twink-back {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: -10000px 5000px;
+    }
+}
+
+#OrrerySVG {
+    display:block;
+    max-height:95vh;
+    width:95vw;
+    margin:auto;
+}
+
+.StarBackground {
+    background: url(/img/stars.png) black repeat top center;
+    fill: url(/img/stars.png) black repeat top center;
+}
+
+.Sign {
+    .block {
+        stroke-width: 30;
+    }
+    .label {
+        font-family: 'Kanit', sans-serif;
+        font-size: 175px;
+        font-weight: 900;
+        text-anchor: middle;
+        font-variant: small-caps;
+        letter-spacing: 50px;
+        stroke-width: 10;
+    }
+    .glyph {
+        stroke-width: 15;
+    }
+    {% for sign in site.data.orrery.signs %}
+    &#{{ sign[0] | capitalize }} {
+        .block, .glyph, .label {
+            stroke: {{ sign[1].color.main }};
+        }
+        .glyph, .label {
+            fill: url(#gradient{{ sign[1].planet.exaltation | capitalize}}Fill);
+        }
+        .block {
+            fill: url(#gradient{{ sign[0] | capitalize }}Fill);
+        }
+    }
+    {% endfor %}
+}
+
+.Planet {
+    text {
+        font-family: 'Oswald', sans-serif;
+        //stroke: black;
+        stroke-width: 5px;
+        font-weight: 400;
+    }
+    {% for planet in site.data.orrery.planets %}
+    &#{{ planet[0] | capitalize }} {
+        .coord, .label {
+            fill: {{ planet[1].color.main }};
+            stroke: {{ planet[1].color.accent }};
+        }
+        .retrograde {
+            fill: {{ planet[1].color.accent }};
+        }
+        circle {
+            stroke: {{ planet[1].color.main }};
+            fill: url(#gradient{{ planet[0] | capitalize }}Fill);
+        }
+    }
+    {% endfor %}
+}
+
+.House {
+    .block {
+        stroke-width: 20;
+    }
+    .label {
+        font-weight: 400;
+    }
+    .coord, .label {
+        font-family: 'Kanit', sans-serif;
+        font-size: 140px;
+        //font-weight: 400;
+        //font-variant: small-caps;
+        text-anchor: middle;
+        letter-spacing: 10px;
+        stroke-width: 10;
+    }
+    {% for house in site.data.orrery.houses %}
+    &#house{{ house[0] }} {
+        .block {
+            stroke: url(#gradient{{ house[1].ruler | capitalize }}Fill);
+        }
+        .coord, .label {
+            fill: url(#gradient{{ house[1].ruler | capitalize }}Fill);
+        }
+    }
+    {% endfor %}
+}
+
+.zodiacAspects {
+    .aspect {
+        stroke-width: 10;
+        stroke: black;
+        fill: none;
+        {% for aspect in site.data.orrery.aspects %}
+        &.{{ aspect.name }} {
+            stroke: {{ aspect.color }};
+        }
+        {% endfor %}
+    }
+}
+
+.tests {
+    display: none;
+}
+
+section {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 5px;
+    border-radius: 5px;
+}

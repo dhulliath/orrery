@@ -1,0 +1,34 @@
+- name: conjunction
+  color: yellow
+  angle: 0
+  leeway: 6
+  
+- name: opposition
+  color: orange
+  angle: 180
+  leeway: 6
+
+- name: trine
+  color: blue
+  angle: 120
+  leeway: 6
+
+- name: sextile
+  color: lightgreen
+  angle: 60
+  leeway: 6
+
+- name: square
+  color: red
+  angle: 90
+  leeway: 6
+
+- name: semisextile
+  color: cyan
+  angle: 30
+  leeway: 2
+
+- name: quincunx
+  color: purple
+  angle: 150
+  leeway: 2
