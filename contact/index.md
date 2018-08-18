@@ -1,11 +1,12 @@
 ---
-layout: dev
+layout: doc
 title: Feedback
+navbar: true
 ---
 
 No one man is an island of development and ideas. I welcome input, be it suggestions, criticisms, encouragement, and what have you. Those in the Hokum camp are probably going to be ignored. 
 
-<form name="feedback" method="POST" netlify-honeypot="hithere" action="/feedback_done/" netlify>
+<form name="feedback" method="POST" netlify-honeypot="hithere" action="/contact/done/" netlify>
 	<p style="visibility:hidden">
 		<label>Human's don't touch this <input name="hithere" /></label>
 	</p>

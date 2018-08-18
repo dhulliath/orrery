@@ -1,0 +1,22 @@
+---
+---
+
+@import url('https://fonts.googleapis.com/css?family=Dosis|Indie+Flower|Sawarabi+Mincho');
+
+section {
+	font-family: 'Dosis', sans-serif;
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: justify;
+}
+
+nav {
+	font-family: 'Sawarabi Mincho', sans-serif;
+	a {
+		min-width: 10%;
+		display: inline-block;
+	}
+}
