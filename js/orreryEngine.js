@@ -111,12 +111,55 @@ Object.defineProperty(AstroAddress.prototype, 'encodedString', {
 	}
 })
 
+function AstroAspect(address1, address2) {
+	this._addresses = [address1, address2]
+	address1.event_onChange.push(this._recheckFunc())
+	address2.event_onChange.push(this._recheckFunc())
+	//this.recheck()
+}
+AstroAspect.prototype.event = {onUpdate: []}
+AstroAspect.prototype._aspects = [
+	{n: 'conjunction', a: 0, o: 6},
+	{n: 'opposition', a: 180, o: 6},
+	{n: 'trine', a: 120, o: 4},
+	{n: 'square', a: 90, o: 4},
+	{n: 'sextile', a: 60, o: 4}]
+AstroAspect.prototype.recheck = function() {
+	var cur = this._aspect
+	this._aspect = null
+	for (a in this._aspects) {
+		if (Math.abs(this.diff - this._aspects[a].a) < (this._aspects[a].o / 2)) {
+			this._aspect = this._aspects[a]
+		}
+	}
+	if (this._aspect != cur) {this.onUpdate()}
+}
+AstroAspect.prototype._recheckFunc = function() {
+	var L = this
+	return (() => {
+		L.recheck()
+	})
+}
+AstroAspect.prototype.onUpdate = function() {for (var f in this.event.onUpdate) {this.event.onUpdate[f](this)}}
+Object.defineProperty(AstroAspect.prototype, 'diff', {
+	get: function() {return Math.abs(this._addresses[0].longitude - this._addresses[1].longitude)}
+})
+Object.defineProperty(AstroAspect.prototype, 'type', {
+	get: function() {
+		if (this._aspect) return this._aspect.n
+		else return null
+	}
+})
+
 function AstroCollection(indexes) {
 	this.db = {}
 	this._indexes = indexes
 }
 AstroCollection.prototype.getByIndex = function(index) {return this.db[this._indexes.indexOf(index)]}
-AstroCollection.prototype.add = function(id, address) {this.db[id] = address}
+AstroCollection.prototype.add = function(id, address) {
+	this.db[id] = address
+	address.id = id
+}
 AstroCollection.prototype.get = function(id) {return this.db[id]}
 AstroCollection.prototype.getByID = function(id) {return this.db[id]}
 AstroCollection.prototype.set = function(id, longitude = null, flags = null) {
@@ -125,10 +168,35 @@ AstroCollection.prototype.set = function(id, longitude = null, flags = null) {
 	if (longitude != null) {this.db[id].longitude = longitude}
 }
 
+// This is an extended form of AstroCollection designed to look at relationships between AstroAddress's
+function AstroAspects(indexes) {
+	AstroCollection.call(this, indexes)
+	//this.aspects = {}
+}
+// Inherit everything from the Data Engine
+AstroAspects.prototype = Object.create(AstroCollection.prototype)
+AstroAspects.prototype.constructor = AstroAspects
+AstroAspects.prototype.add = function(id, address) {
+	if (!address.aspects) address.aspects = {}
+	for (var p in this.db) {
+		var pl = this.get(p)
+		if (!address.aspects[pl.id]) {
+			let a = new AstroAspect(address, pl)
+			//console.log(address.id, address, pl.id, pl)
+			address.aspects[pl.id] = a
+			pl.aspects[id] = a
+		}
+	}
+	AstroCollection.prototype.add.apply(this, [id, address])
+}
+AstroAspects.prototype.checkAspects = function(address) {
+
+}
+
 ////Splitting the Astro Engine and the Graphics Engine apart.
 ////Data Engine
 function AstroEngine() {
-	this.planet = new AstroCollection(['sun','moon','mercury','venus','mars','jupiter','saturn','uranus','neptune','pluto','northnode','blackmoonlilith','chiron','juno','vesta','ceres'])
+	this.planet = new AstroAspects(['sun','moon','mercury','venus','mars','jupiter','saturn','uranus','neptune','pluto','northnode','blackmoonlilith','chiron','juno','vesta','ceres'])
 	this.house = new AstroCollection([0,1,2,3,4,5,6,7,8,9,10,11])
 	// Populate houses
 	for (var i = 0; i < 12; i++) {
@@ -137,6 +205,8 @@ function AstroEngine() {
 	for (var i in this.planet._indexes) {
 		this.planet.add(this.planet._indexes[i], new AstroAddress(0))
 	}
+	this.planet.add('ascendant', this.house.get(0))
+	this.planet.add('midheaven', this.house.get(9))
 }
 // Makes the first character of string uppercase
 AstroEngine.prototype._jsUcfirst = function(string) {return string.charAt(0).toUpperCase() + string.slice(1)}
@@ -231,16 +301,15 @@ function AstroGraphics(svg_element) {
 	// construct graphics engine
 	this.dom = {svg: svg_element}
 	this.dom.defs = this.dom.svg.querySelector('defs')
+	this.dom.aspects = this.dom.svg.querySelector('.zodiacAspects')
 	for (var i = 0; i < 12; i++) {
 		this._extendHouse(this.house.get(i), i)
 	}
 	this._extendAscendant(this.house.get(0), '.zodiacRing')
-	this._extendPlanet(this.house.get(0), 'ascendant')
-	this._extendPlanet(this.house.get(9), 'midheaven')
-	for (var i in this.planet._indexes) {
-		var s = this.planet._indexes[i]
-		var p = this.planet.get(s)
-		this._extendPlanet(p, s)
+	/*this._extendPlanet(this.house.get(0), 'ascendant')
+	this._extendPlanet(this.house.get(9), 'midheaven')*/
+	for (var p in this.planet.db) {
+		this._extendPlanet(this.planet.get(p), p)
 	}
 }
 // Inherit everything from the Data Engine
@@ -303,6 +372,7 @@ AstroGraphics.prototype._extendPlanet = function(address, id) {
 	address.dom.planet = {group: this.dom.svg.querySelector('.Planet#' + this._jsUcfirst(id))}
 	address.dom.planet.coord = address.dom.planet.group.querySelector('.coord textPath')
 	address.dom.planet.retrograde = address.dom.planet.group.querySelector('.retrograde')
+	address.dom.planet.circle = address.dom.planet.group.querySelector('circle')
 
 	address.event_onChange.push(function(o, a) {
 		o.dom.planet.coord.textContent = o.toString()
@@ -312,6 +382,37 @@ AstroGraphics.prototype._extendPlanet = function(address, id) {
 		}
 		o.dom.planet.group.style.visibility = 'visible'
 	})
+
+	for (var ia in address.aspects) {
+		let a = address.aspects[ia]
+		if (!a.dom) {
+			var p = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+			p.id = [address.id, ia].sort().join('-')
+			this.dom.aspects.appendChild(p)
+			a.dom = {path: p}
+			a.event.onUpdate.push((o) => {
+				/// Event Function for AstroAspect
+				if (o.type != null) {
+					let r = [o._addresses[0].dom.planet.circle.cy.baseVal.value - 5000, 
+						o._addresses[1].dom.planet.circle.cy.baseVal.value - 5000]
+					let points = [AstroDraw._polarToCartesian(5000, 5000, r[0], 0 - o._addresses[0].longitude + 300),
+						AstroDraw._polarToCartesian(5000, 5000, r[1], 0 - o._addresses[1].longitude + 300)]
+					let angle = o._addresses[0].longitude - o._addresses[1].longitude
+					let invert = angle >= 0 ? "1" : "0"
+					let largeArc = (Math.abs(angle) < 180 ? "0" : "1")
+
+					let path = ['M', points[0].x, points[0].y, 'A', r[0] * 2, r[1] * 2, 0, 0, 1 - invert, points[1].x, points[1].y].join(' ')
+					o.debug = [r, points]
+					o.dom.path.setAttribute('class', 'aspect ' + o.type)
+					o.dom.path.setAttributeNS(null, 'd', path)
+					o.dom.path.style.visibility = 'visible'
+				} else {
+					o.dom.path.style.visibility = 'hidden'
+					o.dom.path.setAttributeNS(null, 'd', '')
+				} // Done function
+			})
+		}
+	}
 }
 
 // Drawing functions that don't really need to be in the class

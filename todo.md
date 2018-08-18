@@ -9,7 +9,7 @@ I'll try to do these in top to bottom order.
 ### Planet house calculation
 This'll probably be a helper function in the AstroEngine class. Probably along the lines of lookupHouse(AstroAddress), and return the appropriate index or AstroAddress to the caller. Is it worth extending AstroAddress so planets can look up looking at themselves? Probably not; they'd have to refer back to the other database in AstroEngine. Sounds like a lot of legwork.
 
-### Aspect calculation and generation
+### ~~Aspect calculation and generation~~
 This will likely be another onChange function added to each planetary AstroAddress. Anticipating trickiness fitting the Ascendant and Midheaven into this. I don't know if I'll bother with making a seperate Aspect class, since they're just a relationship between two points. Although maybe it would make sense...
 
 Idea:
