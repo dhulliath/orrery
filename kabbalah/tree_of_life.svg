@@ -1,0 +1,29 @@
+---
+---
+<svg viewBox="0 0 500 1000" xmlns="http://www.w3.org/2000/svg">
+	<style>
+.sefirot.concealed circle {stroke-dasharray: 4}
+.sefirot circle { stroke: black; stroke-width: 2px;}
+.sefirot text {text-anchor: middle;}
+.connections path.reg {stroke: black; stroke-width: 4px;}
+.connections path.kav {stroke: black; stroke-width: 10px;}
+	</style>
+	<g class="connections">
+{%- for p in site.pages -%}
+{%- if p.dir == '/kabbalah/sefirot/' -%}
+	{%- for conn in p.svg.connection -%}
+		<path class="{{ conn.type }}" d="M{{ p.svg.col | times: 200 | minus: 150 }},{{ p.svg.row | times: 100 | minus: 50 }} L{{ conn.col | times: 200 | minus: 150 }},{{ conn.row | times: 100 | minus: 50 }}" />
+	{%- endfor -%}
+{%- endif -%}
+{%- endfor -%}
+	</g>
+{%- for p in site.pages -%}
+{%- if p.dir == '/kabbalah/sefirot/' -%}
+	<g class="sefirot{% for c in p.svg.class %} {{ c }}{% endfor%}" id="{{ p.svg.roman }}">
+		<circle fill="{{ p.svg.color }}" cx="{{ p.svg.col | times: 200 | minus: 150 }}" cy="{{ p.svg.row | times: 100 | minus: 50 }}" r="48" />
+		<text x="{{ p.svg.col | times: 200 | minus: 150 }}" y="{{ p.svg.row | times: 100 | minus: 50 }}">{{ p.svg.hebrew }}</text>
+		<text x="{{ p.svg.col | times: 200 | minus: 150 }}" y="{{ p.svg.row | times: 100 | minus: 35 }}">{{ p.svg.roman }}</text>
+	</g>
+{%- endif -%}
+{%- endfor -%}
+</svg>
