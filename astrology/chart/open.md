@@ -3,13 +3,17 @@ title: Natal Chart
 layout: doc
 js_additional:
  - /js/orreryEngine.js
+ - /js/orreryData.js
  - /js/teleport/teleport-autocomplete.min.js
 css_additional:
  - /css/teleport/teleport-autocomplete.min.css
 navbar: true
 ---
 
+## New Chart
+
 ### Basic Chart
+Label: <input id="label" type="text" placeholder="label" /><br/>
 Year: <input id="year" type="number" placeholder="year" value="2018" />
 Month: <select id="month" />
 Day: <select id="day" />
@@ -27,16 +31,25 @@ Moon signs change every two and a half days, so an individual born near the cusp
 Everything looks good?
 <input type="submit" value="Calculate!" onClick="reqChart()" />
 
+## Saved Charts
+<ul id="savedcharts"></ul>
+
 <script>
 const Orrery = new AstroEngine()
+const Saved = new OrreryData('charts')
 
 const m = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 const inputs = {
+	_label: document.querySelector('#label'),
+	label: function() {return this._label.value},
 	year: document.querySelector('#year'),
 	month: document.querySelector('#month'),
 	day: document.querySelector('#day'),
 	hour: document.querySelector('#hour'),
-	minute: document.querySelector('#minute')
+	minute: document.querySelector('#minute'),
+	toString: function() {
+		return [m[parseInt(this.month.value) - 1].substring(0,3), this.day.value, this.year.value].join(' ')
+	}
 }
 const out = document.querySelector('#qString')
 
@@ -87,9 +100,63 @@ function reqChart() {
 	
 }
 function chartReturn() {
-	var qString = 'p=' + Orrery.planetEncoded
-	if (Orrery.houseEncoded != '000000000000000000000000') qString+='&h='+Orrery.houseEncoded
-	window.location.href = '/astrology/chart/?' + qString
+	let qString = []
+	let q = [Orrery.planetEncoded]
+	let s = {p: Orrery.planetEncoded}
+	if (Orrery.houseEncoded != '000000000000000000000000') {
+		s.h = Orrery.houseEncoded
+		q.push(s.h)
+	}
+
+	s.d = inputs.toString()
+	if (tp.value) s.c = tp.value.name
+	if (inputs.label()) s.l = inputs.label()
+	s.z = Orrery.planet.get('sun').toString('%Z')
+
+	for (let i in s) qString.push(i + '=' + s[i])
+
+	Saved.set(q.join('-'), s)
+
+	window.location.href = '/astrology/chart/?' + qString.join('&')
 	//out.textContent = qString
 }
+
+function loadCharts() {
+	var c = document.querySelector('#savedcharts')
+	var k = Saved.keys()
+	for (ik in k) {
+		let s = Saved.get(k[ik])
+
+		let d = {}
+		d.l = document.createElement('li')
+		d.a = document.createElement('a')
+		
+		d.t = document.createElement('p')
+		d.t.setAttribute('class', 'title')
+		d.a.appendChild(d.t)
+		
+		d.t.textContent = [s.l, s.z].join(': ')
+
+		d.s = document.createElement('p')
+		d.s.setAttribute('class', 'subtitle')
+		d.a.appendChild(d.s)
+
+		d.l.setAttribute('id', k[ik])
+
+		let t = []
+		if (s.d) t[0] = s.d
+		if (s.c) t[1] = s.c
+		d.s.textContent = t.join(', ')
+
+		let ht = k[ik].split('-')
+		let href = ['p=' + ht[0]]
+		if (ht[1]) href.push('h=' + ht[1])
+		href.push('l=' + s.l)
+		d.a.setAttribute('href', '/astrology/chart/?' + href.join('&'))
+
+		d.l.appendChild(d.a)
+		c.appendChild(d.l)
+	}
+}
+loadCharts()
 </script>

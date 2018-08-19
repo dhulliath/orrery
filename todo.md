@@ -22,12 +22,15 @@ As you can see from this bare-assed barely styled page, little to no effort has 
 
 
 
-### User Interface
-Automatically bookmark chart URL's in client database, provide labelling system. For charts entered on the client, save with original chart data (year, month, day, hour, minute, location, etc). Modify generated URL to include a label parameter for friendly sharing.
+### Make Chart work in Microsft Edge
+Honestly I don't think I'll ever get to this.
 
 ---
 
 # Completed
+
+### (August 19, 2018) ~~User Interface~~
+Automatically bookmark chart URL's in client database, provide labelling system. For charts entered on the client, save with original chart data (year, month, day, hour, minute, location, etc). Modify generated URL to include a label parameter for friendly sharing.
 
 ### (August 18, 2018) ~~Aspect calculation and generation~~ 
 This will likely be another onChange function added to each planetary AstroAddress. Anticipating trickiness fitting the Ascendant and Midheaven into this. I don't know if I'll bother with making a seperate Aspect class, since they're just a relationship between two points. Although maybe it would make sense...
