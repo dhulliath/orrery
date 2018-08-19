@@ -1,7 +1,7 @@
 ---
 title: Sun in Aries
 source: https://cafeastrology.com/index/suninsigns.html
-layout: base
+layout: doc
 ---
 Aries is the first sign of the zodiac, and Aries natives are the first to start—and the first to finish—whatever they set out to do. Aries is an active, energetic sign. People with Sun in Aries are direct, straightforward, and uncomplicated. They expect the same from others, and are baffled when they don’t always get it.
 
