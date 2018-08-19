@@ -20,3 +20,14 @@ nav {
 		display: inline-block;
 	}
 }
+
+#savedcharts {
+	li {
+		.title {
+			margin-bottom: 0px;
+		}
+		.subtitle {
+			margin-top: 0px;
+		}
+	}
+}

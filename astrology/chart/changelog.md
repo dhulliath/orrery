@@ -1,7 +1,7 @@
 ---
 layout: doc
 title: Changelog
-navbar: true
+navbar: false
 ---
 
 # Changelog

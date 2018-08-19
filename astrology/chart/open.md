@@ -12,27 +12,37 @@ navbar: true
 
 ## New Chart
 
-### Basic Chart
-Label: <input id="label" type="text" placeholder="label" /><br/>
-Year: <input id="year" type="number" placeholder="year" value="2018" />
-Month: <select id="month" />
-Day: <select id="day" />
+### Basics
+<label>Label: <input id="label" type="text" placeholder="label" /><br/></label>
+<label>Year: <input id="year" type="number" placeholder="year" value="2018" /></label>
+<label>Month: <select id="month" /></label>
+<label>Day: <select id="day" /></label>
 
 ### Detailed Chart
-Moon signs change every two and a half days, so an individual born near the cusp may need to know their birth time for an accurate result. Furthermore, the location one is born dictates the size of the houses which affects placement of the Ascending Sign (cusp of first house) and Midheaven (cusp of tenth house). Without knowing birthplace or birthtime these require a professional astrologer to discover through interview.
-
-
 <select id="hour"><option value="no">Hour</option></select>
 <select id="minute"><option value="no">Minute</option></select>
 
-<input type="text" class="city-search" />
+<label>Place of Birth<input type="text" class="city-search" /></label>
 
 ### Calculate
 Everything looks good?
-<input type="submit" value="Calculate!" onClick="reqChart()" />
+<input type="submit" value="Request Chart" onClick="reqChart()" />
+
+A birth location and birth time are required for a more detailed chart. The point on the horizon where the sun rises marks the location of the Ascendant, or the cusp of the First House. This in itself is an important sign in a person's chart. Without knowing the birth location and time, however, this cannot be discovered without an interview process.
+
+Moon signs change every two and a half days, so an individual born near the cusp may need to know their birth time for an accurate result. 
+
+
 
 ## Saved Charts
 <ul id="savedcharts"></ul>
+
+## Boring Details
+* [Changelog](/astrology/chart/changelog/)
+* [Todo](/astrology/chart/todo/)
+
+
+
 
 <script>
 const Orrery = new AstroEngine()
@@ -139,7 +149,7 @@ function loadCharts() {
 
 		d.s = document.createElement('p')
 		d.s.setAttribute('class', 'subtitle')
-		d.a.appendChild(d.s)
+		//d.a.appendChild(d.s)
 
 		d.l.setAttribute('id', k[ik])
 
@@ -155,6 +165,7 @@ function loadCharts() {
 		d.a.setAttribute('href', '/astrology/chart/?' + href.join('&'))
 
 		d.l.appendChild(d.a)
+		d.l.appendChild(d.s)
 		c.appendChild(d.l)
 	}
 }
