@@ -19,11 +19,11 @@ No one man is an island of development and ideas. I welcome input, be it suggest
 	<p>
 		<h4>Fields of Interest</h4>
 		{%- for interest in site.data.contact_interests -%}
-		<label><input type="checkbox" name="int_{{ interest.title }}">{{ interest.title }}</label><br/>
+		<label><input type="checkbox" name="interest_{{ interest.title }}">{{ interest.title }}</label><br/>
 		{%- endfor -%}
 	</p>
 	<p>
-		<label>Comments <textarea style="width: 100%; height:8em;" name="notions"></textarea></label>
+		<label>Comments <textarea style="width: 100%; height:8em;" name="comments"></textarea></label>
 	</p>
 	<p>
 		<button type="submit">Send Feedback</button>
