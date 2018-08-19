@@ -11,7 +11,7 @@ js_additional:
   - https://code.jquery.com/jquery-3.3.1.min.js
 ---
 
-### [New Chart](/astrology/chart/new/)
+### [New Chart](/astrology/chart/open/)
 
 <script>
 
