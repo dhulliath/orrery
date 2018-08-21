@@ -11,6 +11,16 @@ section {
     padding: 5px;
     border-radius: 5px;
     text-align: justify;
+
+    img {
+    	max-width: 25%;
+    	&:nth-child(odd) {
+    		float: right;
+    	}
+    	&:nth-child(even) {
+    		float: left;
+    	}
+    }
 }
 
 nav {

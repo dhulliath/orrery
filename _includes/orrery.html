@@ -20,6 +20,15 @@
 		<path id="pathHouse{{ house[0] }}Coord" />
 		{% endfor %}
 	</defs>
+	<filter id="planetBlur">
+		<feMorphology operator="dilate" radius="7" in="SourceGraphic" result="d" />
+        <feColorMatrix in="d" result="c" type="matrix" values="0.8 0 0 0 0  0 0.8 0 0 0  0 0 0.8 0 0  0 0 0 1 0" />
+        <feGaussianBlur in="c" stdDeviation="10" result="bl" />
+		<feMerge>
+			<feMergeNode in="bl" />
+			<feMergeNode in="SourceGraphic" />
+		</feMerge>
+	</filter>
 	<g class="zodiacRing" >
 		<g class="zodiacAspects"></g>
 		<g class="zodiacHouses">

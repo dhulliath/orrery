@@ -1,0 +1,7 @@
+main:
+  - url: /astrology
+    title: Astrology
+    identifier: astrology
+  - url: /kabbalah
+    title: Kabbalah
+    identifier: kabbalah

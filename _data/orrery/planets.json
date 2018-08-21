@@ -2,8 +2,8 @@
     "blackmoonlilith" : {
         "name" : "PLANET_BLACKMOONLILITH",
         "color" : {
-            "main" : "brown",
-            "accent" : "black"
+            "main" : "darkred",
+            "accent" : "coral"
         },
         "orbit" : {
             "order" : 3650,

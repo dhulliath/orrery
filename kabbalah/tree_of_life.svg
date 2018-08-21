@@ -1,29 +1,75 @@
 ---
 ---
-<svg viewBox="0 0 500 1000" xmlns="http://www.w3.org/2000/svg">
-	<style>
-.sefirot.concealed circle {stroke-dasharray: 4}
-.sefirot circle { stroke: black; stroke-width: 2px;}
-.sefirot text {text-anchor: middle;}
-.connections path.reg {stroke: black; stroke-width: 4px;}
-.connections path.kav {stroke: black; stroke-width: 10px;}
-	</style>
-	<g class="connections">
+<svg viewBox="-10 -10 310 910" xmlns="http://www.w3.org/2000/svg">
+	<defs>
 {%- for p in site.pages -%}
 {%- if p.dir == '/kabbalah/sefirot/' -%}
-	{%- for conn in p.svg.connection -%}
-		<path class="{{ conn.type }}" d="M{{ p.svg.col | times: 200 | minus: 150 }},{{ p.svg.row | times: 100 | minus: 50 }} L{{ conn.col | times: 200 | minus: 150 }},{{ conn.row | times: 100 | minus: 50 }}" />
-	{%- endfor -%}
+		<radialGradient id="grad{{ p.svg.roman | slugify }}">
+			<stop offset="0%" stop-opacity="1" stop-color="{{ p.svg.color }}" />
+			<stop offset="100%" stop-opacity="0" stop-color="{{ p.svg.color }}" />
+		</radialGradient>
 {%- endif -%}
 {%- endfor -%}
-	</g>
+
+	</defs>
+	<style>
+.sefirot text {text-anchor: middle; fill: black;}
+.sefirot.concealed text {fill: black;}
+#connections .sefirot text {fill: white;}
+#connections path.reg {stroke: white; stroke-width: 5px;}
+#connections path.kav {stroke: white; stroke-width: 10px;}
+	</style>
+	<filter id="solidblur">
+		<feColorMatrix in="SourceGraphic" type="matrix" values="1.2 0 0 0 0  0 1.2 0 0 0  0 0 1.2 0 0  0 0 0 1 0" result="c" />
+		<feMorphology operator="erode" radius="1" in="c" result="m" />
+		<feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b" />
+		<feMerge>
+			<feMergeNode in="b" />
+			<feMergeNode in="m" />
+		</feMerge>
+	</filter>
+	<mask id="connections">
+{%- for p in site.pages -%}
+{%- if p.dir == '/kabbalah/sefirot/' -%}
+	<circle fill="white" cx="{{ p.svg.col | times: 100 | minus: 50 }}" cy="{{ p.svg.row | times: 100 | minus: 50 }}" r="50" />
+	{%- for conn in p.svg.connection -%}
+		<path stroke="white" class="{{ conn.type }}" d="M{{ p.svg.col | times: 100 | minus: 50 }},{{ p.svg.row | times: 100 | minus: 50 }} L{{ conn.col | times: 100 | minus: 50 }},{{ conn.row | times: 100 | minus: 50 }}" />
+	{%- endfor -%}
+	
+{%- endif -%}
+{%- endfor -%}
 {%- for p in site.pages -%}
 {%- if p.dir == '/kabbalah/sefirot/' -%}
 	<g class="sefirot{% for c in p.svg.class %} {{ c }}{% endfor%}" id="{{ p.svg.roman }}">
-		<circle fill="{{ p.svg.color }}" cx="{{ p.svg.col | times: 200 | minus: 150 }}" cy="{{ p.svg.row | times: 100 | minus: 50 }}" r="48" />
-		<text x="{{ p.svg.col | times: 200 | minus: 150 }}" y="{{ p.svg.row | times: 100 | minus: 50 }}">{{ p.svg.hebrew }}</text>
-		<text x="{{ p.svg.col | times: 200 | minus: 150 }}" y="{{ p.svg.row | times: 100 | minus: 35 }}">{{ p.svg.roman }}</text>
+		{%- unless p.svg.concealed == true -%}
+		<circle fill="black" cx="{{ p.svg.col | times: 100 | minus: 50 }}" cy="{{ p.svg.row | times: 100 | minus: 50 }}" r="40" />
+		{%- endunless -%}
+		<text x="{{ p.svg.col | times: 100 | minus: 50 }}" y="{{ p.svg.row | times: 100 | minus: 50 }}">{{ p.svg.hebrew }}</text>
+		<text x="{{ p.svg.col | times: 100 | minus: 50 }}" y="{{ p.svg.row | times: 100 | minus: 37 }}">{{ p.svg.roman }}</text>
 	</g>
 {%- endif -%}
 {%- endfor -%}
+
+
+	</mask>
+	
+	<g filter="url(#solidblur)" class="colors">
+{%- for p in site.pages -%}
+{%- if p.dir == '/kabbalah/sefirot/' -%}
+		<circle mask="url(#connections)" fill="url(#grad{{ p.svg.roman | slugify }})" cx="{{ p.svg.col | times: 100 | minus: 50 }}" cy="{{ p.svg.row | times: 100 | minus: 50 }}" r="200" />
+{%- endif -%}
+{%- endfor -%}		
+	</g>
+	<g class="labels">
+{%- for p in site.pages -%}
+{%- if p.dir == '/kabbalah/sefirot/' -%}
+		<g class="sefirot">
+			<text x="{{ p.svg.col | times: 100 | minus: 50 }}" y="{{ p.svg.row | times: 100 | minus: 50 }}">{{ p.svg.hebrew }}</text>
+			<text x="{{ p.svg.col | times: 100 | minus: 50 }}" y="{{ p.svg.row | times: 100 | minus: 37 }}">{{ p.svg.roman }}</text>
+		</g>
+{%- endif -%}
+{%- endfor -%}
+	</g>
+	
+
 </svg>
