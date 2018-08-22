@@ -168,6 +168,7 @@ function loadCharts() {
 		href.push('l=' + s.l)
 		d.a.setAttribute('href', '/astrology/chart/?' + href.join('&'))
 
+		d.l.setAttribute('id', k[ik])
 		d.l.appendChild(d.a)
 		d.l.appendChild(d.s)
 		d.l.appendChild(d.d)
@@ -176,7 +177,8 @@ function loadCharts() {
 }
 function delChart(id) {
 	Saved.delete(id)
-	location.reload()
+	document.querySelector('#' + id).remove()
+	//location.reload()
 }
 
 loadCharts()
