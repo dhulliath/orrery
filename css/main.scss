@@ -44,3 +44,30 @@ nav {
 		}
 	}
 }
+
+#charts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    .chart {
+        width: 250px;
+        padding: 0.3em;
+        //border: 1px solid black;
+        background: #f0f0f0;
+        border-radius: 0.4em;
+        margin: 0.15em;
+        img {
+            float: left;
+        }
+        div {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            * {
+
+            }
+        }
+        .name {font-weight: bold;}
+        .delete {align-self: flex-end;}
+    }
+}
