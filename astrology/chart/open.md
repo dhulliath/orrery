@@ -153,6 +153,10 @@ function loadCharts() {
 
 		d.l.setAttribute('id', k[ik])
 
+		d.d = document.createElement('a')
+		d.d.setAttribute('class', 'far fa-trash-alt')
+		d.d.setAttribute('href', 'javascript:delChart("' + k[ik] + '")')
+
 		let t = []
 		if (s.d) t[0] = s.d
 		if (s.c) t[1] = s.c
@@ -166,8 +170,14 @@ function loadCharts() {
 
 		d.l.appendChild(d.a)
 		d.l.appendChild(d.s)
+		d.l.appendChild(d.d)
 		c.appendChild(d.l)
 	}
 }
+function delChart(id) {
+	Saved.delete(id)
+	location.reload()
+}
+
 loadCharts()
 </script>
