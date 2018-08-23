@@ -1,5 +1,8 @@
 ---
 ---
+$enable-gradients: true;
+$primary: darkorange;
+@import 'bootstrap/bootstrap';
 
 @import url('https://fonts.googleapis.com/css?family=Dosis|Indie+Flower|Sawarabi+Mincho');
 
@@ -21,17 +24,17 @@ section {
     		float: left;
     	}
     }
-    a {
-        text-decoration: none;
-    }
 }
 
 nav {
 	font-family: 'Sawarabi Mincho', sans-serif;
-	a {
-		min-width: 10%;
-		display: inline-block;
-	}
+}
+nav.fixed-top+* {
+    margin-top: 60px;
+}
+#main_nav {
+    @extend .navbar-light;
+    @extend .bg-gradient-primary;
 }
 
 #savedcharts {

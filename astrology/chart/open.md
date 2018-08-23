@@ -6,27 +6,41 @@ js_additional:
  - /js/orreryData.js
  - /js/teleport/teleport-autocomplete.min.js
 css_additional:
- - /css/teleport/teleport-autocomplete.min.css
+ - /css/teleport/teleport.css
 navbar: true
+menus: astrology
 ---
 
 ## New Chart
 
-### Basics
-<label>Label: <input id="label" type="text" placeholder="label" /><br/></label>
-<label>Year: <input id="year" type="number" placeholder="year" value="2018" /></label>
-<label>Month: <select id="month" /></label>
-<label>Day: <select id="day" /></label>
+<div class="input-group mb-3">
+	<div class="input-group-prepend">
+		<span class="input-group-text">Label</span>
+	</div>
+	<input id="label" type="text" class="form-control" placeholder="your name/title/honorific here" />
+</div>
+<div class="input-group mb-3">
+	<div class="input-group-prepend">
+		<span class="input-group-text">Birthday</span>
+	</div>
+	<input id="year" type="number" placeholder="year" />
+	<select id="month" class="custom-select"></select>
+	<select id="day" class="custom-select"></select>
+</div>
 
 ### Detailed Chart
-<select id="hour"><option value="no">Hour</option></select>
-<select id="minute"><option value="no">Minute</option></select>
 
-<label>Place of Birth<input type="text" class="city-search" /></label>
+<div class="input-group mb-3">
+	<div class="input-group-prepend">
+		<span class="input-group-text">Time of Birth</span>
+	</div>
+	<select id="hour" class="custom-select"><option value="no">Hour</option></select>
+	<select id="minute" class="custom-select"><option value="no">Minute</option></select>
+	<input type="text" class="city-search form-control" placeholder="Place of Birth" />
+</div>
 
-### Calculate
-Everything looks good?
-<input type="submit" value="Request Chart" onClick="reqChart()" />
+<button type="button" class="btn btn-primary" onClick="reqChart()">Create Chart</button>
+
 
 A birth location and birth time are required for a more detailed chart. The point on the horizon where the sun rises marks the location of the Ascendant, or the cusp of the First House. This in itself is an important sign in a person's chart. Without knowing the birth location and time, however, this cannot be discovered without an interview process.
 

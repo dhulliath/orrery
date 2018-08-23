@@ -1,0 +1,25 @@
+<nav id="main_nav" class="navbar navbar-expand-lg fixed-top">
+	<a class="navbar-brand" href="/">Culdi.ca</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarMain">
+		<ul class="navbar-nav mr-auto">
+			{%- for item in site.menus.main -%}
+			<li class="nav-item {% if item.children %}dropdown{% endif %}">
+				
+				{%- if item.children -%}
+				<a class="nav-link dropdown-toggle" href="#" id="navbar{{ item.title | slug }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ item.title }}</a>
+				<div class="dropdown-menu" aria-labelledby="navbar{{ item.title | slug }}">
+				{%- for item in item.children -%}
+					<a class="dropdown-item" href="{{ item.url | absolute_url }}">{{item.title}}</a>
+				{%- endfor -%}
+				</div>
+				{%- else -%}
+				<a class="nav-link" href="{{ item.url | absolute_url }}">{{item.title}}</a>
+				{%- endif -%}
+			</li>
+			{%- endfor -%}
+		</ul>
+	</div>
+</nav>
