@@ -50,8 +50,9 @@ Moon signs change every two and a half days, so an individual born near the cusp
 
 ## Saved Charts
 
-<div id="charts">
+<div id="charts" class="card-columns">
 </div>
+
 
 ## Boring Details
 * [Changelog](/astrology/chart/changelog/)
@@ -147,37 +148,48 @@ function chartReturn() {
 	//out.textContent = qString
 }
 
+function chartCard(id) {
+	let s = Saved.get(id)
+	let o = {}
+
+	let ht = id.split('-')
+	let href = ['p=' + ht[0]]
+	if (ht[1]) href.push('h=' + ht[1])
+	href.push('l=' + s.l)
+
+	o.c = document.createElement('div')
+	o.c.setAttribute('class', 'card')
+	o.c.setAttribute('id', id)
+
+	o.c.appendChild(o.b = document.createElement('div'))
+	o.b.setAttribute('class', 'card-body')
+
+	o.b.appendChild(o.h = document.createElement('h5'))
+	o.h.setAttribute('class', 'card-title')
+	o.h.textContent = s.l
+
+	o.b.appendChild(o.t = document.createElement('div'))
+	o.t.setAttribute('class', 'card-text')
+	o.t.textContent = [s.d, s.c].join(', ')
+
+	o.b.appendChild(o.o = document.createElement('a'))
+	o.o.setAttribute('class', 'card-link btn btn-primary')
+	o.o.setAttribute('href', '/astrology/chart/?' + href.join('&'))
+	o.o.textContent = 'Open'
+
+	o.b.appendChild(o.d = document.createElement('a'))
+	o.d.setAttribute('class', 'card-link')
+	o.d.setAttribute('href', 'javascript:delChart("' + id + '")')
+	o.d.textContent = 'Delete'
+
+	return o.c
+}
+
 function loadCharts() {
 	var c = document.querySelector('#charts')
 	var k = Saved.keys()
 	for (ik in k) {
-		let s = Saved.get(k[ik])
-
-		let ht = k[ik].split('-')
-		let href = ['p=' + ht[0]]
-		if (ht[1]) href.push('h=' + ht[1])
-		href.push('l=' + s.l)
-
-		let o = {}
-		o.c = document.createElement('div')
-		o.c.setAttribute('class', 'chart')
-		o.c.setAttribute('id', k[ik])
-		o.c.appendChild(o.i = document.createElement('img'))
-		o.c.appendChild(o.l1 = document.createElement('div'))
-		o.c.appendChild(o.l2 = document.createElement('div'))
-		o.l1.appendChild(o.nm = document.createElement('a'))
-		o.l2.appendChild(o.dt = document.createElement('div'))
-		o.l2.appendChild(o.ct = document.createElement('div'))
-		o.l1.appendChild(o.dl = document.createElement('a'))
-		o.nm.textContent = s.l
-		o.nm.setAttribute('class', 'name')
-		o.nm.setAttribute('href', '/astrology/chart/?' + href.join('&'))
-		o.dt.textContent = s.d
-		o.ct.textContent = s.c
-		o.dl.setAttribute('class', 'delete far fa-trash-alt')
-		o.dl.setAttribute('href', 'javascript:delChart("' + k[ik] + '")')
-
-		c.appendChild(o.c)
+		c.appendChild(chartCard(k[ik]))
 	}
 }
 function delChart(id) {
