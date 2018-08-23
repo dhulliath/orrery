@@ -32,7 +32,11 @@ markdown: kramdown
 plugins:
   - jekyll-feed
   - jekyll-menus
+  - jekyll-autoprefixer
 #  - jekyll-babel
+
+autoprefixer:
+  only_production: true
 
 include:
   - _redirects

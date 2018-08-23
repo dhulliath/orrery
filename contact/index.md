@@ -11,22 +11,26 @@ No one man is an island of development and ideas. I welcome input, be it suggest
 	<p style="visibility:hidden">
 		<label>Humans don't touch this <input name="hithere" /></label>
 	</p>
+	<div class="input-group mb-3">
+		<div class="input-group-prepend"><span class="input-group-text">Name</span></div>
+		<input class="form-control" type="text" name="name" />
+	</div>
+	<div class="input-group mb-3">
+		<div class="input-group-prepend"><span class="input-group-text">Email Address</span></div>
+		<input class="form-control" type="email" name="email" />
+	</div>
+	<h4>Fields of Interest</h4>
+	{%- for interest in site.data.contact_interests -%}
+	<div class="form-check">
+		<input class="form-check-input" type="checkbox" id="interest_{{ interest.title | slug }}" name="interest_{{ interest.title }}">
+		<label class="form-check-label" for="interest_{{ interest.title | slug }}">{{ interest.title }}</label>
+	</div>
+	{%- endfor -%}
+	<div class="form-group mb-3">
+		<label for="comments">Comments</label>
+		<textarea class="form-control" id="comments" name="comments" rows="5"></textarea>
+	</div>
 	<p>
-		<label>Name <input type="text" name="name" /></label>
-	</p>
-	<p>
-		<label>Email <input type="email" name="email" /></label>
-	</p>
-	<p>
-		<h4>Fields of Interest</h4>
-		{%- for interest in site.data.contact_interests -%}
-		<label><input type="checkbox" name="interest_{{ interest.title }}">{{ interest.title }}</label><br/>
-		{%- endfor -%}
-	</p>
-	<p>
-		<label>Comments <textarea style="width: 100%; height:8em;" name="comments"></textarea></label>
-	</p>
-	<p>
-		<button type="submit">Send Feedback</button>
+		<button class="btn btn-primary" type="submit">Send Feedback</button>
 	</p>
 </form>
