@@ -4,6 +4,7 @@
 <meta property="og:url" content="{{ page.url | absolute_url }}" />
 <meta property="og:image" content="{{ page.seo.image | default: '/img/og_default.png' | absolute_url }}" />
 <meta property="og:description" content="{{ page.excerpt }}" />
+<meta property="fb:app_id" content="{{ site.seo.fb.app_id }}" />
 <script>
   window.fbAsyncInit = function() {
     FB.init({appId: '{{ site.seo.fb.app_id }}', cookie: true, xfbml: true, version: '{{ site.seo.fb.app_ver }}'});
