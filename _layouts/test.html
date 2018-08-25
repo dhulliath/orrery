@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Style Test
+		</title>
+		<link rel="stylesheet" href="/css/culdi.css" >
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="{{ '/js/navbar.js' | absolute_url }}"></script>
+	</head>
+	<body>
+		<section class="navigation">
+			<div class="nav-container">
+				<div class="brand">
+					<a href="/">{{ site.title }}</a>
+				</div>
+				<nav>
+					<div class="nav-mobile">
+						<a id="nav-toggle" href="#!"><span></span></a>
+					</div>
+					<ul class="nav-list">
+						{%- for item in site.menus.main -%}
+						<li>
+							
+							{%- if item.children -%}
+							<a href="#!">{{ item.title }}</a>
+							<ul class="nav-dropdown">
+								{%- for item in item.children -%}
+								<li>
+									<a href="{{ item.url }}">{{ item.title }}</a>
+								</li>
+								{%- endfor -%}
+							</ul>
+							{%- else -%}
+							<a href="{{ item.url }}">{{ item.title }}</a>
+							{%- endif -%}
+						</li>
+						{%- endfor -%}
+					</ul>
+				</nav>
+			</div>
+		</section>
+		<main class="container background-dark">
+			{{ content }}
+		</main>
+	</body>
+</html>

@@ -27,6 +27,7 @@ seo:
     app_id: 269665650426805
     app_ver: v3.1
 
+
 # Build settings
 markdown: kramdown
 plugins:
@@ -34,6 +35,15 @@ plugins:
   - jekyll-menus
   - jekyll-autoprefixer
 #  - jekyll-babel
+
+defaults:
+  -
+    scope:
+      path: /astrology/planet/sun
+    values:
+      menus: 
+        astrology_planet_sun:
+          weight: 11
 
 autoprefixer:
   only_production: true
