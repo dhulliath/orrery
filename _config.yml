@@ -36,14 +36,14 @@ plugins:
   - jekyll-autoprefixer
 #  - jekyll-babel
 
-defaults:
-  -
-    scope:
-      path: /astrology/planet/sun
-    values:
-      menus: 
-        astrology_planet_sun:
-          weight: 11
+#defaults:
+#  -
+#    scope:
+#      path: /astrology/planet/sun
+#    values:
+#      menus: 
+#        astrology_planet_sun:
+#          weight: 11
 
 autoprefixer:
   only_production: true
