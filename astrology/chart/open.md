@@ -36,7 +36,14 @@ menus: astrology
 	</div>
 	<select id="hour" class="custom-select"><option value="no">Hour</option></select>
 	<select id="minute" class="custom-select"><option value="no">Minute</option></select>
-	<input type="text" class="city-search form-control" placeholder="Place of Birth" />
+	
+</div>
+
+<div class="input-group mb-3">
+	<div class="input-group-prepend">
+		<span class="input-group-text">Birthplace</span>
+	</div>
+	<input type="text" class="city-search form-control" />
 </div>
 
 <button type="button" class="btn btn-primary" onClick="reqChart()">Create Chart</button>
