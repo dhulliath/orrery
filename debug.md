@@ -1,14 +1,35 @@
 ---
 layout: doc
 ---
-{%- for p in site.pages -%}
 
-<div style="border: 1px solid black; padding: 1em; margin: 1em;">
 
-{% highlight js %}
-{{ p }}
-{% endhighlight %}
+site
 
-</div>
+{{ site }}
+{% for p in site %}
+* {{p }}{% endfor %}
 
-{%- endfor -%}
+---
+
+site.kab_sefirot
+
+{% for p in site.kab_sefirot %}
+* {{ p }}{% endfor %}
+
+---
+
+site.collections
+
+{{ site.collections }}
+
+{% for p in site.collections %}
+* {{ p }}{% endfor %}
+
+---
+
+site.collections.kab_sefirot
+
+{{ site.collections.kab_sefirot }}
+{% for p in site.collections.kab_sefirot %}
+* {{ p }}{% endfor %}
+

@@ -1,5 +1,7 @@
 ---
 title: Binah
+categories: 
+  - kab_sefirot
 svg:
   roman: Binah
   hebrew: בינה
@@ -18,3 +20,5 @@ svg:
       row: 4
       type: reg
 ---
+
+{{ page.categories }}

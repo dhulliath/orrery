@@ -48,6 +48,11 @@ plugins:
 autoprefixer:
   only_production: true
 
+collections:
+  kab_sefirot:
+    output: true
+    permalink: /kabbalah/sef/:name
+
 include:
   - _redirects
 

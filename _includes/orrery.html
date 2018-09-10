@@ -64,7 +64,14 @@
 		{% assign planet_label = planet[1].name %}
 		<g class="Planet" id="{{ planet[0] | capitalize }}" style="visibility: hidden">
 			<path class="block" />
-			<text dy="{{ planet[1].orbit.orb }}" class="coord" text-anchor="start" font-size="{{ planet[1].orbit.orb | divided_by: 1.25 }}">
+			<g class="labels">
+				<text x="5000" y="{{ 5000 | plus: planet[1].orbit.order }}" dx="{{ planet[1].orbit.orb | times: 1.25 | plus: 5}}px" class="label" font-size="{{ planet[1].orbit.orb | times: 1.25 }}">
+					{{ oStrings[planet_label] }}
+				</text>
+				<text x="5000" y="{{ 5000 | plus: planet[1].orbit.order }}" dx="{{ planet[1].orbit.orb | times: 1.25 | plus: 5}}px" dy="{{ planet[1].orbit.orb | divided_by: 1.25 }}" class="coord" font-size="{{ planet[1].orbit.orb | divided_by: 1.25 }}">
+				</text>
+			</g>
+			<!--<text dy="{{ planet[1].orbit.orb }}" class="coord" text-anchor="start" font-size="{{ planet[1].orbit.orb | divided_by: 1.25 }}">
 				<textpath startOffset="0%" xlink:href="#path{{ planet[0] | capitalize }}Label">
 					
 				</textpath>
@@ -73,7 +80,7 @@
 				<textpath xlink:href="#path{{ planet[0] | capitalize }}Label">
 					{{ oStrings[planet_label] }}
 				</textpath>
-			</text>
+			</text>-->
 			{% unless planet[1].can_retrograde == false %}<text style="visibility: hidden" class="retrograde" dy="{{ planet[1].orbit.orb | divided_by: 3 }}" text-anchor="end" font-size="{{ planet[1].orbit.orb }}">
 				<textpath xlink:href="#path{{ planet[0] | capitalize }}Label" startOffset="100%">
 					℞
