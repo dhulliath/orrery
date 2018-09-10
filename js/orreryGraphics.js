@@ -74,8 +74,8 @@ AstroGraphics.prototype._extendHouse = function(address, id) {
 AstroGraphics.prototype._extendPlanet = function(address, id) {
 	this._extendDom(address)
 	address.dom.planet = {group: this.dom.svg.querySelector('.Planet#' + this._jsUcfirst(id))}
-	address.dom.planet.labels = address.dom.planet.group.querySelector('.labels')
-	address.dom.planet.coord = address.dom.planet.group.querySelector('.coord')
+	//address.dom.planet.labels = address.dom.planet.group.querySelector('.labels')
+	address.dom.planet.coord = address.dom.planet.group.querySelector('.coord textPath')
 	address.dom.planet.retrograde = address.dom.planet.group.querySelector('.retrograde')
 	address.dom.planet.circle = address.dom.planet.group.querySelector('circle')
 
@@ -83,7 +83,7 @@ AstroGraphics.prototype._extendPlanet = function(address, id) {
 		let angle = 0 - o.longitude + 120
 		o.dom.planet.coord.textContent = o.toString()
 		o.dom.planet.group.setAttribute('transform', 'rotate(' + angle + ' 5000 5000)')
-		o.dom.planet.labels.setAttribute('transform', 'rotate(' + (0-angle) + ' 5000 ' + o.dom.planet.circle.cy.baseVal.value + ')')
+		//o.dom.planet.labels.setAttribute('transform', 'rotate(' + (0-angle) + ' 5000 ' + o.dom.planet.circle.cy.baseVal.value + ')')
 		if (o.dom.planet.retrograde) {
 			o.dom.planet.retrograde.style.visibility = (o.flags[0] == 1 ? 'visible' : 'hidden')
 		}
