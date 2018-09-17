@@ -33,9 +33,7 @@ AstroGraphics.prototype._extendDom = function(address) {
 AstroGraphics.prototype._extendAscendant = function(address, id) {
 	this._extendDom(address)
 	address.dom.ascendant = {ring: this.dom.svg.querySelector(id)}
-	address.event_onChange.push(function(o, a) {
-		o.dom.ascendant.ring.setAttribute('transform', 'rotate(' + (-30 + o.longitude) + ' 5000 5000)')
-	})
+	address.addOnChange(function() {this.dom.ascendant.ring.setAttribute('transform', 'rotate(' + (-30 + this.longitude) + ' 5000 5000)')})
 }
 // redraw the house when address is changed
 AstroGraphics.prototype._extendHouse = function(address, id) {

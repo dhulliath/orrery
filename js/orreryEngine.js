@@ -21,6 +21,9 @@ function AstroAddress(val, flags = [0, 0, 0]) {
 AstroAddress.prototype._schema = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 AstroAddress.prototype._schema_pad_to = 4
 AstroAddress.prototype._flag_max = 3
+AstroAddress.prototype.addOnChange = function(f) {
+	this.event_onChange.push(f.bind(this))
+}
 AstroAddress.prototype.onChange = function(a) {
 	for (var i in this.event_onChange) {
 		if (typeof this.event_onChange[i] === 'function') {
