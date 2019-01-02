@@ -7,5 +7,16 @@ layout: base
 {% include orrery.html %}
 
 <section>
+	{% assign planets = site.data.orrery.planet_list | sort: 'text-order' %}
+	{% for planet in planets %}
+	{% assign planet_label = planet.name %}
+	<div id="{{ planet.id }}" class="interpretation">
+		<h2>{{ oStrings[planet_label] }}</h2>
+		<div class="sign"></div>
+		<div class="retrograde"></div>
+		<div class="house"></div>
+		<div class="aspects"></div>
+	</div>
+	{% endfor %}
 	{{ content }}
 </section>

@@ -1,0 +1,234 @@
+- id: blackmoonlilith
+  name: PLANET_BLACKMOONLILITH
+  color:
+    main: darkred
+    accent: coral
+  orbit:
+    order: 3650
+    orb: 125
+    arc: 80
+    default_position: 10
+  text-order: 55
+
+- id: northnode
+  name: PLANET_ASCENDINGNODE
+  color:
+    accent: cornflowerblue
+    main: darkblue
+  orbit:
+    order: 3650
+    orb: 125
+    arc: 80
+    default_position: 194
+  can_retrograde: false
+  text-order: 25
+
+- id: moon
+  name: PLANET_MOON
+  color:
+    main: white
+    accent: cornflowerblue
+  orbit:
+    order: 3650
+    orb: 145
+    arc: 100
+    default_position: 120
+  text-order: 20
+
+- id: vertex
+  name: PLANET_VERTEX
+  color:
+    main: grey
+    accent: white
+  orbit:
+    order: 3850
+    orb: 125
+    arc: 80
+    default_position: 323
+  text-order: 200
+
+- id: midheaven
+  name: PLANET_MIDHEAVEN
+  color:
+    main: grey
+    accent: white
+  orbit:
+    order: 3850
+    orb: 125
+    arc: 80
+    default_position: 49
+  style:
+    visibility: hidden
+  text-order: 35
+
+- id: ascendant
+  name: PLANET_ASCENDANT
+  color:
+    main: gold
+    accent: white
+  orbit:
+    order: 3850
+    orb: 145
+    arc: 100
+    default_position: 21
+  style:
+    visibility: hidden
+  text-order: 30
+
+- id: sun
+  name: PLANET_SUN
+  color:
+    main: gold
+    accent: darkorange
+  orbit:
+    order: 3850
+    orb: 145
+    arc: 100
+    default_position: 120
+  text-order: 10
+  can_retrograde: false
+
+- id: pluto
+  name: PLANET_PLUTO
+  color:
+    main: brown
+    accent: maroon
+  orbit:
+    order: 1880
+    orb: 125
+    arc: 80
+    default_position: 189
+  text-order: 110
+
+- id: neptune
+  name: PLANET_NEPTUNE
+  color:
+    main: violet
+    accent: lightpink
+  orbit:
+    order: 2040
+    orb: 125
+    arc: 80
+    default_position: 97
+  text-order: 100
+
+- id: uranus
+  name: PLANET_URANUS
+  color:
+    main: lightseagreen
+    accent: blue
+  orbit:
+    order: 2200
+    orb: 125
+    arc: 80
+    default_position: 344
+  text-order: 90
+
+- id: saturn
+  name: PLANET_SATURN
+  color:
+    main: darkgrey
+    accent: grey
+  orbit:
+    order: 2360
+    orb: 125
+    arc: 80
+    default_position: 192
+  text-order: 80
+
+- id: jupiter
+  name: PLANET_JUPITER
+  color:
+    main: orange
+    accent: darkorchid
+  orbit:
+    order: 2520
+    orb: 125
+    arc: 80
+    default_position: 24
+  text-order: 70
+
+- id: ceres
+  name: PLANET_CERES
+  color:
+    main: pink
+    accent: purple
+  orbit:
+    order: 2660
+    orb: 90
+    arc: 60
+    default_position: 297
+  text-order: 180
+
+- id: juno
+  name: PLANET_JUNO
+  color:
+    main: white
+    accent: purple
+  orbit:
+    order: 2780
+    orb: 90
+    arc: 60
+    default_position: 261
+  text-order: 180
+
+- id: vesta
+  name: PLANET_VESTA
+  color:
+    main: white
+    accent: green
+  orbit:
+    order: 2900
+    orb: 90
+    arc: 60
+    default_position: 116
+  text-order: 180
+
+- id: chiron
+  name: PLANET_CHIRON
+  color:
+    main: plum
+    accent: green
+  orbit:
+    order: 3020
+    orb: 90
+    arc: 60
+    default_position: 72
+  text-order: 130
+
+- id: mars
+  name: PLANET_MARS
+  color:
+    main: red
+    accent: maroon
+  orbit:
+    order: 3160
+    orb: 125
+    arc: 80
+    default_position: 221
+  text-order: 60
+
+- id: venus
+  name: PLANET_VENUS
+  color:
+    main: mediumseagreen
+    accent: green
+  orbit:
+    order: 3320
+    orb: 125
+    arc: 80
+    default_position: 131
+  text-order: 50
+
+- id: mercury
+  name: PLANET_MERCURY
+  color:
+    main: gold
+    accent: brown
+  orbit:
+    order: 3480
+    orb: 125
+    arc: 80
+    default_position: 221
+  text-order: 40
+

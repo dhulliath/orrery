@@ -3,6 +3,7 @@ title: Sun in Taurus
 source: https://cafeastrology.com/index/suninsigns.html
 menus: planetSun
 localnav: planetSun
+dataset: signs_sun
 ---
 There is something very solid about Taurus natives, no matter what the rest of their charts say about them. Though they are dependable most of the time, this generally shows itself more in habit than in outright helpfulness.Taurus natives are sensual folk–and this includes sex, but extends to pleasures in all areas: they delight in the sensual pleasures of food, a comfortable blanket, a richly colored aquarium to look at, the smell of flowers or spring rain, pleasing melodies coming from their stereos, and so forth. Some might even say they live through their senses more than most.
 

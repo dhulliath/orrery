@@ -1,5 +1,6 @@
 {
     "blackmoonlilith" : {
+        "id": "blackmoonlilith",
         "name" : "PLANET_BLACKMOONLILITH",
         "color" : {
             "main" : "darkred",
@@ -14,6 +15,7 @@
         "text-order": 150
     },
     "northnode" : {
+        "id": "northnode",
         "name" : "PLANET_ASCENDINGNODE",
         "color" : {
             "accent" : "cornflowerblue",
@@ -25,7 +27,8 @@
             "arc" : 80,
             "default_position" : 194
         },
-        "can_retrograde": false
+        "can_retrograde": false,
+        "text-order": 25
     },
     "moon" : {
         "name" : "PLANET_MOON",
@@ -39,7 +42,7 @@
             "arc" : 100,
             "default_position" : 120
         },
-        "text-order": 2
+        "text-order": 20
     },
     "vertex" : {
         "name" : "PLANET_VERTEX",
@@ -52,7 +55,8 @@
             "orb" : 125,
             "arc" : 80,
             "default_position" : 323
-        }
+        },
+        "text-order": 200
     },
     "midheaven" : {
         "name" : "PLANET_MIDHEAVEN",
@@ -68,7 +72,8 @@
         },
         "style": {
             "visibility": "hidden"
-        }
+        },
+        "text-order": 35
     },
     "ascendant" : {
         "name" : "PLANET_ASCENDANT",
@@ -85,7 +90,7 @@
         "style": {
             "visibility": "hidden"
         },
-        "text-order": 3
+        "text-order": 30
     },
     "sun" : {
         "name" : "PLANET_SUN",
@@ -99,7 +104,7 @@
             "arc" : 100,
             "default_position" : 120
         },
-        "text-order": 1,
+        "text-order": 10,
         "can_retrograde": false
     },
     "pluto" : {
@@ -183,7 +188,8 @@
             "orb" : 90,
             "arc" : 60,
             "default_position" : 297
-        }
+        },
+        "text-order": 180
     },
     "juno" : {
         "name" : "PLANET_JUNO",
@@ -196,7 +202,8 @@
             "orb" : 90,
             "arc" : 60,
             "default_position" : 261
-        }
+        },
+        "text-order": 180
     },
     "vesta" : {
         "name" : "PLANET_VESTA",
@@ -209,7 +216,8 @@
             "orb" : 90,
             "arc" : 60,
             "default_position" : 116
-        }
+        },
+        "text-order": 180
     },
     "chiron" : {
         "name" : "PLANET_CHIRON",

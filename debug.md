@@ -3,33 +3,14 @@ layout: doc
 ---
 
 
-site
 
-{{ site }}
-{% for p in site %}
-* {{p }}{% endfor %}
+# inspection
 
----
+{% assign pages = site.pages | where: 'dataset','signs_sun' %}
+{{ pages | inspect }}
+{% for p in pages %}
+## {{p.name}}
 
-site.kab_sefirot
-
-{% for p in site.kab_sefirot %}
-* {{ p }}{% endfor %}
-
----
-
-site.collections
-
-{{ site.collections }}
-
-{% for p in site.collections %}
-* {{ p }}{% endfor %}
-
----
-
-site.collections.kab_sefirot
-
-{{ site.collections.kab_sefirot }}
-{% for p in site.collections.kab_sefirot %}
-* {{ p }}{% endfor %}
-
+{{ p.content | truncatewords: 50 | markdownify }}
+{{ p | inspect }}
+{% endfor %}

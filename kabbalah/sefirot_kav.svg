@@ -1,0 +1,196 @@
+<svg version="1.1" baseProfile="full" viewBox="0 0 5300 6210" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<path id="textWorldRight" d="M1250,2550 A1250 1250 0 0 0 1250 0" />
+		<path id="textWorldLeft" d="M1250,0 A1250 1250 0 0 0 1250 2550" />
+	</defs>
+	<style>
+		.linkage {
+			stroke: plum;
+			stroke-width: 60 !important;
+			fill: transparent;
+		}
+
+		.sefirot {
+			fill: white;
+		}
+		.non.sefirot {
+			stroke-dasharray: 30;
+		}
+
+		.world {
+			fill: transparent;
+			stroke-width: 60;
+		}
+
+		.beit {
+			fill: transparent;
+		}
+
+		.azilut {
+			stroke: red;
+			stroke-width: 50;
+		}
+		.beriah {
+			stroke: orange;
+			stroke-width: 40;
+		}
+		.yetzirah {
+			stroke: yellow;
+			stroke-width: 30;
+		}
+		.assiyah {
+			stroke: green;
+			stroke-width: 20;
+		}
+
+		.azilut.beriah {
+			stroke: orange;
+		}
+		.beriah.yetzirah {
+			stroke: green;
+		}
+		.yetzirah.assiyah {
+			stroke: limegreen;
+		}
+
+		.azilut.beriah.yetzirah {stroke: pink;}
+		.beriah.yetzirah.assiyah {stroke: cyan;}
+
+		.realm text {
+			stroke-width: 0;
+			font-size: 150px;
+			text-anchor: middle;
+		}
+		.labels text {
+			text-anchor: left;
+			font-size: 125px;
+		}
+		
+	</style>
+	<g class="linkages">
+		<circle class="linkage" cx="1250" cy="3100" r="3100" />
+
+		<!--<circle class="linkage azilut beriah yetzirah" cx="1250" cy="2500" r="2500" />-->
+		<circle class="linkage beriah yetzirah assiyah" cx="1250" cy="3700" r="2500" />
+
+		<!--<circle class="linkage azilut beriah" cx="1250" cy="1900" r="1900" />-->
+		<!--<circle class="linkage beriah yetzirah" cx="1250" cy="3100" r="1900" />-->
+		<circle class="linkage yetzirah assiyah" cx="1250" cy="4300" r="1900" />
+	</g>
+	<g class="labels">
+		<text x="2650" y="150">Kether</text>
+		<text x="2650" y="750">Da'at</text>
+		<text x="2650" y="1350">Chokhmah</text>
+		<text x="2650" y="1950">Binah</text>
+		<text x="2650" y="2550">Chesed</text>
+		<text x="2650" y="3150">Gevurah</text>
+		<text x="2650" y="3750">Tiferet</text>
+		<text x="2650" y="4350">Netzach</text>
+		<text x="2650" y="4950">Hod</text>
+		<text x="2650" y="5550">Yesod</text>
+		<text x="2650" y="6150">Malkuth</text>
+	</g>
+	<g class="realm azilut">
+		<circle class="world" cx="1250" cy="1300" r="1300" />
+		<path class="beit" d="M1250,400 v2100 l500-900 l-1000,-600 v-600 l500-300 l500,300 l-500,900 l-500-900 h1000 v600 h-1000 v600 h1000 v-600 l-1000,600 l500,900 m-500-900 l500,300 l500-300"/>
+		<circle class="sefirot" cx="1250" cy="100" r="100" />
+		<circle class="sefirot" cx="750" cy="400" r="100" />
+		<circle class="sefirot" cx="1750" cy="400" r="100" />
+		<circle class="non sefirot" cx="1250" cy="700" r="100" />
+		<circle class="sefirot" cx="750" cy="1000" r="100" />
+		<circle class="sefirot" cx="1750" cy="1000" r="100" />
+		<circle class="sefirot tiferet" cx="1250" cy="1300" r="100" />
+		<circle class="sefirot" cx="750" cy="1600" r="100" />
+		<circle class="sefirot" cx="1750" cy="1600" r="100" />
+		<circle class="sefirot" cx="1250" cy="1900" r="100" />
+		<circle class="sefirot" cx="1250" cy="2500" r="100" />
+		<text direction="rtl">
+			<textPath xlink:href="#textWorldLeft" startOffset="50%">
+				אֲצִילוּת
+			</textPath>
+		</text>
+		<text>
+			<textPath xlink:href="#textWorldRight" startOffset="50%">
+				Atziluth - Emanation
+			</textPath>
+		</text>
+	</g>
+	<g class="realm beriah" transform="translate(0,1200)">
+		<circle class="world" cx="1250" cy="1300" r="1300" />
+		<path class="beit" d="M1250,400 v2100 l500-900 l-1000,-600 v-600 l500-300 l500,300 l-500,900 l-500-900 h1000 v600 h-1000 v600 h1000 v-600 l-1000,600 l500,900 m-500-900 l500,300 l500-300"/>
+		<circle class="sefirot" cx="1250" cy="100" r="100" />
+		<circle class="sefirot" cx="750" cy="400" r="100" />
+		<circle class="sefirot" cx="1750" cy="400" r="100" />
+		<circle class="non sefirot" cx="1250" cy="700" r="100" />
+		<circle class="sefirot" cx="750" cy="1000" r="100" />
+		<circle class="sefirot" cx="1750" cy="1000" r="100" />
+		<circle class="sefirot tiferet" cx="1250" cy="1300" r="100" />
+		<circle class="sefirot" cx="750" cy="1600" r="100" />
+		<circle class="sefirot" cx="1750" cy="1600" r="100" />
+		<circle class="sefirot" cx="1250" cy="1900" r="100" />
+		<circle class="sefirot" cx="1250" cy="2500" r="100" />
+		<text direction="rtl">
+			<textPath xlink:href="#textWorldLeft" startOffset="50%">
+				בְּרִיָה
+			</textPath>
+		</text>
+		<text>
+			<textPath xlink:href="#textWorldRight" startOffset="50%">
+				Beri'ah - Creation
+			</textPath>
+		</text>
+	</g>
+	<g class="realm yetzirah" transform="translate(0,2400)">
+		<circle class="world" cx="1250" cy="1300" r="1300" />
+		<path class="beit" d="M1250,400 v2100 l500-900 l-1000,-600 v-600 l500-300 l500,300 l-500,900 l-500-900 h1000 v600 h-1000 v600 h1000 v-600 l-1000,600 l500,900 m-500-900 l500,300 l500-300"/>
+		<circle class="sefirot" cx="1250" cy="100" r="100" />
+		<circle class="sefirot" cx="750" cy="400" r="100" />
+		<circle class="sefirot" cx="1750" cy="400" r="100" />
+		<circle class="non sefirot" cx="1250" cy="700" r="100" />
+		<circle class="sefirot" cx="750" cy="1000" r="100" />
+		<circle class="sefirot" cx="1750" cy="1000" r="100" />
+		<circle class="sefirot tiferet" cx="1250" cy="1300" r="100" />
+		<circle class="sefirot" cx="750" cy="1600" r="100" />
+		<circle class="sefirot" cx="1750" cy="1600" r="100" />
+		<circle class="sefirot" cx="1250" cy="1900" r="100" />
+		<circle class="sefirot" cx="1250" cy="2500" r="100" />
+		<text direction="rtl">
+			<textPath xlink:href="#textWorldLeft" startOffset="50%">
+				יְצִירָה
+			</textPath>
+		</text>
+		<text>
+			<textPath xlink:href="#textWorldRight" startOffset="50%">
+				Yetzirah - Formation
+			</textPath>
+		</text>
+	</g>
+	<g class="realm assiyah" transform="translate(0,3600)">
+		<circle class="world" cx="1250" cy="1300" r="1300" />
+		<path class="beit" d="M1250,400 v2100 l500-900 l-1000,-600 v-600 l500-300 l500,300 l-500,900 l-500-900 h1000 v600 h-1000 v600 h1000 v-600 l-1000,600 l500,900 m-500-900 l500,300 l500-300"/>
+		<circle class="sefirot" cx="1250" cy="100" r="100" />
+		<circle class="sefirot" cx="750" cy="400" r="100" />
+		<circle class="sefirot" cx="1750" cy="400" r="100" />
+		<circle class="non sefirot" cx="1250" cy="700" r="100" />
+		<circle class="sefirot" cx="750" cy="1000" r="100" />
+		<circle class="sefirot" cx="1750" cy="1000" r="100" />
+		<circle class="sefirot tiferet" cx="1250" cy="1300" r="100" />
+		<circle class="sefirot" cx="750" cy="1600" r="100" />
+		<circle class="sefirot" cx="1750" cy="1600" r="100" />
+		<circle class="sefirot" cx="1250" cy="1900" r="100" />
+		<circle class="sefirot" cx="1250" cy="2500" r="100" />
+		
+		<text direction="rtl">
+			<textPath xlink:href="#textWorldLeft" startOffset="50%">
+				עֲשִׂיָה
+			</textPath>
+		</text>
+		<text>
+			<textPath xlink:href="#textWorldRight" startOffset="50%">
+				Assiah - Action
+			</textPath>
+		</text>
+	</g>
+	
+	
+</svg>
