@@ -37,6 +37,7 @@ AstroAddress.prototype.toString = function(format = '%d %z %M\'%S\"') {
 		'%d': this.degreeInSign,
 		'%z': this.signShort,
 		'%Z': this.sign,
+		'%X': this.sign.toLowerCase(),
 		'%M': (this.minute < 10 ? '0'+this.minute : this.minute),
 		'%S': (this.second < 10 ? '0'+this.second : this.second),
 		'%m': this. minute,
@@ -80,7 +81,7 @@ Object.defineProperty(AstroAddress.prototype, 'degreeInSign', {
 	set: function(val) {this.longitude = (this.signNumber * 30) + val + (this.minute_long / 60)}
 })
 Object.defineProperty(AstroAddress.prototype, 'sign', {
-	get: function() {return ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Saggitarius', 'Capricorn', 'Aquarius', 'Pisces'][this.signNumber]}
+	get: function() {return ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'][this.signNumber]}
 })
 Object.defineProperty(AstroAddress.prototype, 'signShort', {
 	get: function() {return this.sign.substring(0,3)}
@@ -127,7 +128,9 @@ AstroAspect.prototype._aspects = [
 	{i: 2, n: 'opposition', a: 180, o: 6},
 	{i: 3, n: 'trine', a: 120, o: 4},
 	{i: 4, n: 'square', a: 90, o: 4},
-	{i: 5, n: 'sextile', a: 60, o: 4}]
+	{i: 5, n: 'sextile', a: 60, o: 4},
+	{i: 6, n: 'semisextile', a: 30, o: 2},
+	{i: 7, n: 'quincunx', a: 150, o: 2}]
 AstroAspect.prototype.recheck = function() {
 	var cur = this._aspect
 	this._aspect = null

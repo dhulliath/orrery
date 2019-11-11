@@ -1,34 +1,41 @@
 - name: conjunction
   color: yellow
+  strength: 20
   angle: 0
   leeway: 6
   
 - name: opposition
   color: orange
+  strength: 20
   angle: 180
   leeway: 6
 
 - name: trine
   color: blue
+  strength: 15
   angle: 120
   leeway: 6
 
 - name: sextile
   color: lightgreen
+  strength: 10
   angle: 60
   leeway: 6
 
 - name: square
   color: red
+  strength: 15
   angle: 90
   leeway: 6
 
 - name: semisextile
   color: cyan
+  strength: 5
   angle: 30
   leeway: 2
 
 - name: quincunx
   color: purple
+  strength: 5
   angle: 150
   leeway: 2

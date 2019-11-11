@@ -40,6 +40,7 @@ AstroGraphics.prototype._extendHouse = function(address, id) {
 	this._extendDom(address)
 	address.dom.house = {group: this.dom.svg.querySelector('.House#house' + id)}
 	address.dom.house.block = address.dom.house.group.querySelector('.block')
+	address.dom.house.coord_parent = address.dom.house.group.querySelector('.coord')
 	address.dom.house.coord = address.dom.house.group.querySelector('.coord textPath')
 	address.dom.house.labelPath = this.dom.defs.querySelector('#pathHouse' + id + 'Label')
 	address.dom.house.coordPath = this.dom.defs.querySelector('#pathHouse' + id + 'Coord')
@@ -48,6 +49,8 @@ AstroGraphics.prototype._extendHouse = function(address, id) {
 		//redraw house
 		var g = AstroDraw.drawHouse(o)
 		o.dom.house.coord.textContent = o.toString()
+		o.dom.house.coord_parent.setAttributeNS(null, 'sign', o.toString('%X'))
+
 		o.dom.house.block.setAttributeNS(null, 'd', g.block)
 		o.dom.house.labelPath.setAttributeNS(null, 'd', g.label)
 		o.dom.house.coordPath.setAttributeNS(null, 'd', g.coord)
@@ -61,10 +64,11 @@ AstroGraphics.prototype._extendHouse = function(address, id) {
 	address.addrNext = this.house.get((id == 11 ? 0 : id + 1))
 	Object.defineProperty(address, 'width', {
 		get: function() {
-			var w = this.addrNext.longitude - this.longitude
+			return (this.addrNext.longitude - this.longitude) % 360;
+			/*var w = this.addrNext.longitude - this.longitude
 			while (w < 0) w += 360
 			while (w >= 360) w -= 360
-			return w
+			return w*/
 		}
 	})
 }
@@ -73,6 +77,7 @@ AstroGraphics.prototype._extendPlanet = function(address, id) {
 	this._extendDom(address)
 	address.dom.planet = {group: this.dom.svg.querySelector('.Planet#' + this._jsUcfirst(id))}
 	//address.dom.planet.labels = address.dom.planet.group.querySelector('.labels')
+	address.dom.planet.coord_parent = address.dom.planet.group.querySelector('.coord')
 	address.dom.planet.coord = address.dom.planet.group.querySelector('.coord textPath')
 	address.dom.planet.retrograde = address.dom.planet.group.querySelector('.retrograde')
 	address.dom.planet.circle = address.dom.planet.group.querySelector('circle')
@@ -80,6 +85,7 @@ AstroGraphics.prototype._extendPlanet = function(address, id) {
 	address.event_onChange.push(function(o, a) {
 		let angle = 0 - o.longitude + 120
 		o.dom.planet.coord.textContent = o.toString()
+		o.dom.planet.coord_parent.setAttributeNS(null, 'sign', o.toString('%X'))
 		o.dom.planet.group.setAttribute('transform', 'rotate(' + angle + ' 5000 5000)')
 		//o.dom.planet.labels.setAttribute('transform', 'rotate(' + (0-angle) + ' 5000 ' + o.dom.planet.circle.cy.baseVal.value + ')')
 		if (o.dom.planet.retrograde) {

@@ -72,6 +72,14 @@ body {
     {% endfor %}
 }
 
+.coord {
+    {% for sign in site.data.orrery.signs %}
+    &[sign="{{ sign[0] }}"] {
+        fill: {{ sign[1].color.accent | capitalize}};
+    }
+    {% endfor %}
+}
+
 .Planet {
     text {
         font-family: 'Oswald', sans-serif;
@@ -84,7 +92,7 @@ body {
     }
     {% for planet in site.data.orrery.planets %}
     &#{{ planet[0] | capitalize }} {
-        .coord, .label {
+        /*.coord,*/ .label {
             fill: {{ planet[1].color.main }};
             //stroke: {{ planet[1].color.accent }};
         }
@@ -121,7 +129,7 @@ body {
         .block {
             stroke: url(#gradient{{ house[1].ruler | capitalize }}Fill);
         }
-        .coord, .label {
+        /*.coord, */.label {
             fill: url(#gradient{{ house[1].ruler | capitalize }}Fill);
         }
     }
@@ -137,6 +145,7 @@ body {
         {% for aspect in site.data.orrery.aspects %}
         &.{{ aspect.name }} {
             stroke: {{ aspect.color }};
+            stroke-width: {{ aspect.strength }}
         }
         {% endfor %}
     }
