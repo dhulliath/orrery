@@ -1,7 +1,7 @@
 ---
 layout: doc
 title: Todo
-navbar: false
+navbar: true
 ---
 
 # Todo List

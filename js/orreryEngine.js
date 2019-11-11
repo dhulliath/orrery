@@ -48,8 +48,9 @@ AstroAddress.prototype.toString = function(format = '%d %z %M\'%S\"') {
 Object.defineProperty(AstroAddress.prototype, 'longitude', {
 	get: function() {return this._longitude},
 	set: function(val) {
-		while (val < 0) val += 360
-		while (val >= 360) val -= 360
+
+		val = val % 360
+
 		this._longitude = val
 		this.onChange()
 	}
@@ -122,11 +123,11 @@ function AstroAspect(address1, address2) {
 }
 AstroAspect.prototype.event = {onUpdate: []}
 AstroAspect.prototype._aspects = [
-	{n: 'conjunction', a: 0, o: 6},
-	{n: 'opposition', a: 180, o: 6},
-	{n: 'trine', a: 120, o: 4},
-	{n: 'square', a: 90, o: 4},
-	{n: 'sextile', a: 60, o: 4}]
+	{i: 1, n: 'conjunction', a: 0, o: 6},
+	{i: 2, n: 'opposition', a: 180, o: 6},
+	{i: 3, n: 'trine', a: 120, o: 4},
+	{i: 4, n: 'square', a: 90, o: 4},
+	{i: 5, n: 'sextile', a: 60, o: 4}]
 AstroAspect.prototype.recheck = function() {
 	var cur = this._aspect
 	this._aspect = null

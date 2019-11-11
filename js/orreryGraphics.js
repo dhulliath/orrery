@@ -98,7 +98,7 @@ AstroGraphics.prototype._extendPlanet = function(address, id) {
 			a.event.onUpdate.push((o) => {
 				/// Event Function for AstroAspect
 				if (o.type != null) {
-					let r = [o._addresses[0].dom.planet.circle.cy.baseVal.value - 5000, 
+					/*let r = [o._addresses[0].dom.planet.circle.cy.baseVal.value - 5000, 
 						o._addresses[1].dom.planet.circle.cy.baseVal.value - 5000]
 					let points = [AstroDraw._polarToCartesian(5000, 5000, r[0], 0 - o._addresses[0].longitude + 300),
 						AstroDraw._polarToCartesian(5000, 5000, r[1], 0 - o._addresses[1].longitude + 300)]
@@ -107,9 +107,9 @@ AstroGraphics.prototype._extendPlanet = function(address, id) {
 					let largeArc = (Math.abs(angle) < 180 ? "0" : "1")
 
 					let path = ['M', points[0].x, points[0].y, 'A', r[0] * 2, r[1] * 2, 0, 0, 1 - invert, points[1].x, points[1].y].join(' ')
-					
+					*/
 					o.dom.path.setAttribute('class', 'aspect ' + o.type)
-					o.dom.path.setAttributeNS(null, 'd', path)
+					o.dom.path.setAttributeNS(null, 'd', AstroDraw.aspectArt(o))
 					o.dom.path.style.visibility = 'visible'
 				} else {
 					o.dom.path.style.visibility = 'hidden'
@@ -122,6 +122,49 @@ AstroGraphics.prototype._extendPlanet = function(address, id) {
 
 // Drawing functions that don't really need to be in the class
 const AstroDraw = {
+	aspectArt: function(aspect)
+	{
+		var r = [aspect._addresses[0].dom.planet.circle.cy.baseVal.value - 5000, 
+			aspect._addresses[1].dom.planet.circle.cy.baseVal.value - 5000];
+
+		var points = [this._polarToCartesian(5000, 5000, r[0], 0 - aspect._addresses[0].longitude + 300),
+			this._polarToCartesian(5000, 5000, r[1], 0 - aspect._addresses[1].longitude + 300)];
+
+		var angle = aspect._addresses[0].longitude - aspect._addresses[1].longitude
+		var invert = angle >= 0 ? "1" : "0"
+		var largeArc = (Math.abs(angle) < 180 ? "0" : "1")
+
+		var path = '';
+
+		let r_mult = 1;
+
+		switch (aspect.type) {
+			/*case 'conjunction':
+				points = [this._polarToCartesian(5000, 5000, r[0] * 1, 0 - aspect._addresses[0].longitude + 300),
+					this._polarToCartesian(5000, 5000, r[1] * 1.1, 0 - aspect._addresses[0].longitude + 300),
+					this._polarToCartesian(5000, 5000, r[1] * 1, 0 - aspect._addresses[1].longitude + 300),
+					this._polarToCartesian(5000, 5000, r[0] * 0.9, 0 - aspect._addresses[1].longitude + 300)];
+				path = ['M', points[0].x, points[0].y,
+					'L', points[1].x, points[1].y,
+					'L', points[2].x, points[2].y,
+					'L', points[3].x, points[3].y,
+					'Z']
+				break;*/
+			case 'opposition':
+			case 'square':
+				path = ['M', points[0].x, points[0].y, 
+					'L', points[1].x, points[1].y]
+			break;
+
+			case 'trine':
+				invert = 1 - invert;
+			default:
+				path = ['M', points[0].x, points[0].y, 
+					'A', r[0] * r_mult, r[1] * r_mult, 0, 0, invert, points[1].x, points[1].y]
+		}
+
+		return path.join(' ')
+	},
 	_polarToCartesian: function (centerX, centerY, radius, angleInDegrees) {
         var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
 
