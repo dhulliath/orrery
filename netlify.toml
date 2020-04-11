@@ -1,0 +1,7 @@
+[build]
+functions = "./_functions"
+
+[[headers]]
+for = "/astrology/*"
+	[headers.values]
+	Access-Control-Allow-Origin = "*"

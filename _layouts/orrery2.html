@@ -1,0 +1,118 @@
+---
+layout: base
+---
+
+{% assign oStrings = site.data.orrery.strings[page.language] %}
+
+<svg id="orrery" style="display:block;max-height:95vh;width:95vw;margin:auto;" viewBox="0 0 10000 10000" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		{% for sign in site.data.orrery.signs %}
+		<linearGradient x1="0%" y1="0%" x2="0%" y2="100%" id="gradient{{ sign[0] | capitalize }}Fill">
+			<stop offset="0%" stop-color="{{ sign[1].color.main }}" />
+			<stop offset="100%" stop-color="{{ sign[1].color.accent }}" />
+		</linearGradient>
+		{% endfor %}
+		<path id="pathSignLabel" d="M 3975.227158472752 1107.6400958713784 A 4025 4025 0 0 1 6024.772841527249 1107.640095871379" />
+		<path id="pathHouseLabel" d="M 330 4900 A 4650 4650 0 0 1 5000 330" />
+		{% for planet in site.data.orrery.planet_list %}
+		<linearGradient x1="0%" y1="0%" x2="0%" y2="100%" id="gradient{{ planet.id | capitalize }}Fill">
+			<stop offset="0%" stop-color="{{ planet.color.main }}" />
+			<stop offset="100%" stop-color="{{ planet.color.accent }}" />
+		</linearGradient>
+		<path id="path{{ planet.id | capitalize }}Label" d="M{{ planet.orbit.orb | divided_by: 2 | plus: 5100 }},{{ 5000 | plus: planet.orbit.order }} A {{ planet.orbit.order }} {{ planet.orbit.order }} 0 1 0 {{ 0 | minus: planet.orbit.orb | divided_by: 2 | plus: 4900 }} {{ 5000 | plus: planet.orbit.order }}" />
+		{% endfor %}
+		{% for house in site.data.orrery.houses %}
+		<path id="pathHouse{{ house[0] }}Label" />
+		<path id="pathHouse{{ house[0] }}Coord" />
+		{% endfor %}
+	</defs>
+	<filter id="planetBlur">
+		<feMorphology operator="dilate" radius="7" in="SourceGraphic" result="d" />
+        <feColorMatrix in="d" result="c" type="matrix" values="0.8 0 0 0 0  0 0.8 0 0 0  0 0 0.8 0 0  0 0 0 1 0" />
+        <feGaussianBlur in="c" stdDeviation="10" result="bl" />
+		<feMerge>
+			<feMergeNode in="bl" />
+			<feMergeNode in="SourceGraphic" />
+		</feMerge>
+	</filter>
+	<g class="zodiacRing" >
+		<g class="zodiacAspects"></g>
+		<g class="zodiacHouses">
+			{% for house in site.data.orrery.houses %}
+			{% assign house_label = house[1].name %}
+			<g class="House" id="house{{ house[0] }}" style="visibility: hidden">
+				<path class="block" />
+				<text class="label">
+					<textPath startOffset="50%" xlink:href="#pathHouse{{ house[0] }}Label">
+						{{ oStrings[house_label] }}&nbsp;
+					</textPath>
+				</text>
+				<text class="coord">
+					<textPath startOffset="50%" xlink:href="#pathHouse{{ house[0] }}Coord">
+					</textPath>
+				</text>
+			</g>
+			{% endfor %}
+		</g>
+		{% for sign in site.data.orrery.signs %}
+		{% assign sign_label = sign[1].name %}
+		<g class="Sign" id="{{ sign[0] | capitalize }}" transform="rotate({{ 0| minus: sign[1].order | minus: 3 | times: 30 | plus: 15 }} 5000 5000)"> 
+			<path class="block" d="M 6171.168961745427 551.588680995862 A 4600 4600 0 0 0 3828.8310382545733 551.5886809958611 L 3981.59220717789 1131.816244344227 A 4000 4000 0 0 1 6018.40779282211 1131.8162443442275 Z" />
+			<path class="glyph" d="{{ sign[1].graphics.glyph }}" />
+			<text class="label" stroke="{{ sign[1].color.main }}" >
+				<textpath startOffset="50%" xlink:href="#pathSignLabel">
+					{{ oStrings[sign_label] }}
+				</textpath>
+			</text>
+		</g>
+		{% endfor %}
+		{% for planet in site.data.orrery.planet_list %}
+		{% assign planet_label = planet.name %}
+		<g class="Planet" id="{{ planet.id | capitalize }}" style="visibility: hidden">
+			<path class="block" />
+			<!--<g class="labels">
+				<text x="5000" y="{{ 5000 | plus: planet[1].orbit.order }}" dx="{{ planet[1].orbit.orb | times: 1.25 | plus: 5}}px" class="label" font-size="{{ planet[1].orbit.orb | times: 1.25 }}">
+					{{ oStrings[planet_label] }}
+				</text>
+				<text x="5000" y="{{ 5000 | plus: planet[1].orbit.order }}" dx="{{ planet[1].orbit.orb | times: 1.25 | plus: 5}}px" dy="{{ planet[1].orbit.orb | divided_by: 1.25 }}" class="coord" font-size="{{ planet[1].orbit.orb | divided_by: 1.25 }}">
+				</text>
+			</g>-->
+			<text dy="{{ planet.orbit.orb }}" class="coord" text-anchor="start" font-size="{{ planet.orbit.orb | divided_by: 1.25 }}">
+				<textpath startOffset="0%" xlink:href="#path{{ planet.id | capitalize }}Label">
+					
+				</textpath>
+			</text>
+			<text dy="" class="label" font-size="{{ planet.orbit.orb | times: 1.25 }}">
+				<textpath xlink:href="#path{{ planet.id | capitalize }}Label">
+					{{ oStrings[planet_label] }}
+				</textpath>
+			</text>
+			{% unless planet[1].can_retrograde == false %}<text style="visibility: hidden" class="retrograde" dy="{{ planet.orbit.orb | divided_by: 3 }}" text-anchor="end" font-size="{{ planet.orbit.orb }}">
+				<textpath xlink:href="#path{{ planet.id | capitalize }}Label" startOffset="100%">
+					℞
+				</textpath>
+			</text>{% endunless %}
+			<circle stroke-width="{{ planet.orbit.orb | divided_by: 5 }}" cx="5000" cy="{{ 5000 | plus: planet.orbit.order }}" r="{{ planet.orbit.orb }}" />
+		</g>
+		{% endfor %}
+	</g>
+	<g class="tests">
+		<path d="M 6190.567607471596 556.7411990702858 A 4600 4600 0 0 0 3809.4323925284043 556.7411990702858 L 3964.7238195899163 1136.2966948437265 A 4000 4000 0 0 1 6035.276180410083 1136.2966948437265 Z" stroke="black" stroke-width="10" fill="none" />
+		<path d="M 3975.227158472752 1107.6400958713784 A 4025 4025 0 0 1 6024.772841527249 1107.640095871379"  stroke="black" stroke-width="10" fill="none" />
+	</g>
+</svg>
+
+<section>
+	{% assign planets = site.data.orrery.planet_list | sort: 'text-order' %}
+	{% for planet in planets %}
+	{% assign planet_label = planet.name %}
+	<div id="{{ planet.id }}" class="interpretation">
+		<h2>{{ oStrings[planet_label] }} <div class="sign"></div></h2>
+		
+		<div class="retrograde"></div>
+		<div class="house"></div>
+		<div class="aspects"></div>
+	</div>
+	{% endfor %}
+	{{ content }}
+</section>
