@@ -3,3 +3,4 @@ Gemfile.lock
 /Vendor
 /vendor
 .DS_Store
+_functions
